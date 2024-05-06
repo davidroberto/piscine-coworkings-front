@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./page/public/HomePage";
 import ListCoworkingsPage from "./page/public/ListCoworkingsPage";
 import DetailsCoworkingPage from "./page/public/DetailsCoworkingPage";
+import LoginPage from "./page/public/LoginPage";
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
         <Route path="/coworkings" element={<ListCoworkingsPage />} />
 
         <Route path="/coworkings/details/:id" element={<DetailsCoworkingPage />} />
+
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
