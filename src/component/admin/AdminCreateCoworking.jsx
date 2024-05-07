@@ -1,3 +1,5 @@
+import AdminHeader from "./AdminHeader";
+
 const AdminCreateCoworking = () => {
   const handleCreateCoworking = (event) => {
     event.preventDefault();
@@ -50,6 +52,7 @@ const AdminCreateCoworking = () => {
 
   return (
     <>
+      <AdminHeader />
       <h2>Créer un coworking</h2>
 
       <form onSubmit={handleCreateCoworking}>

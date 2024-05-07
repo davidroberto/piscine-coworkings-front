@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import AdminHeader from "./AdminHeader";
+import { Link } from "react-router-dom";
 
 const AdminListCoworkings = () => {
   const [coworkings, setCoworkings] = useState([]);
@@ -28,20 +29,27 @@ const AdminListCoworkings = () => {
   };
 
   return (
-    <main>
-      <h2>Les coworkings</h2>
+    <>
+      <AdminHeader />
 
-      <section>
-        {coworkings.map((coworking) => {
-          return (
-            <article key={coworking.id}>
-              <h2>{coworking.name}</h2>
-              <button onClick={(event) => handleDeleteCoworking(event, coworking.id)}>Supprimer</button>
-            </article>
-          );
-        })}
-      </section>
-    </main>
+      <main>
+        <h2>Les coworkings</h2>
+
+        <Link to="/admin/coworkings/create">Créer un coworking</Link>
+
+        <section>
+          {coworkings.map((coworking) => {
+            return (
+              <article key={coworking.id}>
+                <h2>{coworking.name}</h2>
+                <button onClick={(event) => handleDeleteCoworking(event, coworking.id)}>Supprimer</button>
+                <Link to={`/admin/coworkings/${coworking.id}/update`}>Modifier</Link>
+              </article>
+            );
+          })}
+        </section>
+      </main>
+    </>
   );
 };
 

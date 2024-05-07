@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import AdminHeader from "./AdminHeader";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -23,7 +24,13 @@ const AdminDashboard = () => {
     // si le token est périmé et qu'il n'a pas été re-généré : déconnecté l'user
   }, []);
 
-  return <p>Bienvenue Admin</p>;
+  return (
+    <>
+      <AdminHeader />
+
+      <h1>Bienvenue Admin</h1>
+    </>
+  );
 };
 
 export default AdminDashboard;
