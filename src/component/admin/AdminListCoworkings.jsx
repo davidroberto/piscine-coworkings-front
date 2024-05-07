@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const AdminListCoworkings = () => {
   const [coworkings, setCoworkings] = useState([]);
+
+  const [needsRefresh, setNeedRefresh] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5001/api/coworkings", {
@@ -14,14 +16,14 @@ const AdminListCoworkings = () => {
       .then((coworkingsData) => {
         setCoworkings(coworkingsData.data);
       });
-  }, []);
+  }, [needsRefresh]);
 
   const handleDeleteCoworking = (event, coworkingId) => {
-    // le cookie est envoyé avec la requête automatiquement
-    // car il a été créé lors de la connexion
-    // et le serveur a renvoyé un cookie avec la réponse
-    fetch(`http://localhost:5001/api/coworkings/${coworkingId}`, {
+    fetch("http://localhost:5001/api/coworkings/" + coworkingId, {
       method: "DELETE",
+      credentials: "include",
+    }).then((response) => {
+      setNeedRefresh(!needsRefresh);
     });
   };
 
@@ -34,7 +36,7 @@ const AdminListCoworkings = () => {
           return (
             <article key={coworking.id}>
               <h2>{coworking.name}</h2>
-              <button onClick={(event) => handleDeleteCoworking(event, coworking.id)}>Delete</button>
+              <button onClick={(event) => handleDeleteCoworking(event, coworking.id)}>Supprimer</button>
             </article>
           );
         })}

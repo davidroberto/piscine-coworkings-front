@@ -4,7 +4,9 @@ import HomePage from "./page/public/HomePage";
 import ListCoworkingsPage from "./page/public/ListCoworkingsPage";
 import DetailsCoworkingPage from "./page/public/DetailsCoworkingPage";
 import LoginPage from "./page/public/LoginPage";
+import AdminDashboardPage from "./page/admin/AdminDashboardPage";
 import AdminListCoworkingsPage from "./page/admin/AdminListCoworkingsPage";
+import AdminCreateCoworkingPage from "./page/admin/AdminCreateCoworkingPage";
 
 function App() {
   return (
@@ -15,8 +17,9 @@ function App() {
         <Route path="/coworkings/details/:id" element={<DetailsCoworkingPage />} />
 
         <Route path="/login" element={<LoginPage />} />
-
+        <Route path="/admin" element={<AdminDashboardPage />} />
         <Route path="/admin/coworkings" element={<AdminListCoworkingsPage />} />
+        <Route path="/admin/coworkings/create" element={<AdminCreateCoworkingPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ const LoginForm = () => {
       credentials: "include",
     }).then((response) => {
       if (response.status === 200) {
-        setMessage("Connexion réussie");
+        navigate("/admin");
       } else {
         setMessage("Connexion refusée");
       }

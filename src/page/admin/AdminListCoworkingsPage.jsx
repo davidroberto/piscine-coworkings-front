@@ -1,15 +1,7 @@
-import AdminListCoworkings from "../../component/admin/AdminListCoworking";
-import Footer from "../../component/public/Footer";
-import Header from "../../component/public/Header";
+import AdminListCoworkings from "../../component/admin/AdminListCoworkings";
 
 const AdminListCoworkingsPage = () => {
-  return (
-    <>
-      <Header />
-      <AdminListCoworkings />
-      <Footer />
-    </>
-  );
+  return <AdminListCoworkings />;
 };
 
 export default AdminListCoworkingsPage;
