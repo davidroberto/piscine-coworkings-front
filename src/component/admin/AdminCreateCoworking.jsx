@@ -1,6 +1,9 @@
+import { useVerifyToken } from "../../utils/authGuard";
 import AdminHeader from "./AdminHeader";
 
 const AdminCreateCoworking = () => {
+  useVerifyToken();
+
   const handleCreateCoworking = (event) => {
     event.preventDefault();
 
@@ -34,7 +37,7 @@ const AdminCreateCoworking = () => {
 
     const coworkingDataJson = JSON.stringify(coworkingData);
 
-    fetch("http://localhost:5001/api/coworkings", {
+    fetch("http://localhost:5001/api/coworkings/withImg", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,11 +1,14 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useVerifyToken } from "../../utils/authGuard";
+import { useNavigate } from "react-router-dom";
 
 const AdminUpdateCoworking = () => {
   const { id } = useParams();
+  const [coworking, setCoworking] = useState(null);
   const navigate = useNavigate();
 
-  const [coworking, setCoworking] = useState(null);
+  useVerifyToken();
 
   useEffect(() => {
     fetch("http://localhost:5001/api/coworkings/" + id, {
