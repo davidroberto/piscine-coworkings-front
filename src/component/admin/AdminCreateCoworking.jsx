@@ -7,42 +7,41 @@ const AdminCreateCoworking = () => {
   const handleCreateCoworking = (event) => {
     event.preventDefault();
 
-    const name = event.target.name.value;
-    const priceHour = event.target.priceHour.value;
-    const priceDay = event.target.priceDay.value;
-    const priceMonth = event.target.priceMonth.value;
-    const number = event.target.number.value;
-    const street = event.target.street.value;
-    const postCode = event.target.postCode.value;
-    const city = event.target.city.value;
-    const superficy = event.target.superficy.value;
-    const capacity = event.target.capacity.value;
-
-    const coworkingData = {
-      name: name,
-      price: {
-        hour: priceHour,
-        day: priceDay,
-        month: priceMonth,
-      },
-      address: {
-        number: number,
-        street: street,
-        postCode: postCode,
-        city: city,
-      },
-      superficy: superficy,
-      capacity: capacity,
+    // je récupère tous les champs de price, je créé un objet avec
+    // et je le transforme en json (parce que le back stocke le prix en json)
+    const price = {
+      month: parseInt(event.target.priceMonth.value),
+      day: parseInt(event.target.priceDay.value),
+      hour: parseInt(event.target.priceHour.value),
     };
 
-    const coworkingDataJson = JSON.stringify(coworkingData);
+    // je récupère tous les champs d'adresse, je créé un objet avec
+    // et je le transforme en json (parce que le back stocke l'adresse en json)
+    const address = {
+      number: event.target.number.value,
+      street: event.target.street.value,
+      postCode: event.target.postCode.value,
+      city: event.target.city.value,
+    };
 
+    // je veux envoyer des données classiques + un fichier, donc je passe
+    // par un FormData plutôt qu'un envoie en JSON classique
+    const formData = new FormData();
+
+    // j'ajoute dans le form data toutes les données, y compris l'image
+    formData.append("name", event.target.name.value);
+    formData.append("price", JSON.stringify(price));
+    formData.append("address", JSON.stringify(address));
+    formData.append("superficy", event.target.superficy.value);
+    formData.append("capacity", event.target.capacity.value);
+
+    formData.append("image", event.target.image.files[0]);
+
+    // je poste mon formData, en ne specifiant pas qu'on envoie
+    // du json car on envoie un Form Data
     fetch("http://localhost:5001/api/coworkings/withImg", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: coworkingDataJson,
+      body: formData,
       credentials: "include",
     })
       .then((response) => {
@@ -119,6 +118,11 @@ const AdminCreateCoworking = () => {
             <input type="number" name="capacity" />
           </label>
         </div>
+
+        <label>
+          Image
+          <input type="file" name="image" />
+        </label>
 
         <input type="submit" value="Créer" />
       </form>
